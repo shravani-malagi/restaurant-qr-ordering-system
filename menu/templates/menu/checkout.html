@@ -1,0 +1,147 @@
+{% extends "menu/base.html" %}
+
+{% block title %}
+Confirm Order
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-7">
+
+        <div class="card">
+
+            <div class="card-header bg-primary text-white text-center py-4">
+
+                <h2 class="mb-0 fw-bold">
+
+                    Confirm Your Order
+
+                </h2>
+
+            </div>
+
+            <div class="card-body p-5">
+
+                <div class="text-center mb-5">
+
+                    <h1 class="display-6 fw-bold text-success">
+
+                        ₹{{ total }}
+
+                    </h1>
+
+                    <p class="text-muted">
+
+                        Current Order Total
+
+                    </p>
+
+                </div>
+
+                <div class="row g-4 mb-5">
+
+                    <div class="col-md-6">
+
+                        <div class="border rounded-4 p-4 text-center h-100">
+
+                            <h6 class="text-secondary">
+
+                                CUSTOMER
+
+                            </h6>
+
+                            <h4 class="fw-bold">
+
+                                {{ customer_name }}
+
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="border rounded-4 p-4 text-center h-100">
+
+                            <h6 class="text-secondary">
+
+                                TABLE
+
+                            </h6>
+
+                            <h4 class="fw-bold text-primary">
+
+                                {{ table }}
+
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="alert alert-info text-center">
+
+                    <strong>
+
+                        Your order will be sent to the kitchen after confirmation.
+
+                    </strong>
+
+                </div>
+
+                <form action="{% url 'place_order' %}" method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="row g-3 mt-3">
+
+                        <div class="col-md-6">
+
+                            <div class="d-grid">
+
+                                <a href="{% url 'current_order' %}"
+
+                                   class="btn btn-outline-secondary btn-lg">
+
+                                    Back
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="d-grid">
+
+                                <button type="submit"
+
+                                        class="btn btn-primary btn-lg">
+
+                                    Confirm Order
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

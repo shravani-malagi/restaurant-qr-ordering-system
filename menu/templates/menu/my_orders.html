@@ -1,0 +1,213 @@
+{% extends "menu/base.html" %}
+
+{% block title %}
+My Orders
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-9">
+
+        <div class="card">
+
+            <div class="card-header bg-dark text-white text-center py-4">
+
+                <h2 class="mb-0">
+
+                    My Orders
+
+                </h2>
+
+            </div>
+
+            <div class="card-body p-4">
+
+                {% for order %}
+
+                <div class="card mb-4">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+
+                            <div>
+
+                                <h4 class="fw-bold mb-1">
+
+                                    Order #{{ order.id }}
+
+                                </h4>
+
+                                <small class="text-muted">
+
+                                    {{ order.created_at|date:"d M Y, h:i A" }}
+
+                                </small>
+
+                            </div>
+
+                            <div>
+
+                                {% if order.status == "Pending" %}
+
+                                    <span class="badge bg-warning text-dark">
+
+                                        Pending
+
+                                    </span>
+
+                                {% elif order.status == "Preparing" %}
+
+                                    <span class="badge bg-primary">
+
+                                        Preparing
+
+                                    </span>
+
+                                {% elif order.status == "Served" %}
+
+                                    <span class="badge bg-success">
+
+                                        Served
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+
+                                        {{ order.status }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <table class="table table-borderless align-middle">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Item</th>
+
+                                    <th class="text-center">Qty</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                {% for item in order.items.all %}
+
+                                <tr>
+
+                                    <td>
+
+                                        {{ item.menu_item.name }}
+
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        {{ item.quantity }}
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <h5 class="mb-0">
+
+                                Total Amount
+
+                            </h5>
+
+                            <h4 class="text-success fw-bold mb-0">
+
+                                ₹{{ order.total_amount }}
+
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% empty %}
+
+                <div class="alert alert-warning text-center">
+
+                    <h4>
+
+                        No Orders Yet
+
+                    </h4>
+
+                </div>
+
+                {% endfor %}
+
+                <div class="row g-3 mt-2">
+
+                    <div class="col-md-6">
+
+                        <div class="d-grid">
+
+                            <a href="{% url 'home' %}"
+
+                               class="btn btn-primary btn-lg">
+
+                                Continue Ordering
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="d-grid">
+
+                            <a href="{% url 'request_bill' %}"
+
+                               class="btn btn-success btn-lg">
+
+                                Request Bill
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends "menu/base.html" %}
+
+{% block title %}
+Welcome
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card">
+
+            <div class="card-body p-5">
+
+                <div class="text-center mb-5">
+
+                    <h1 class="display-5 fw-bold text-dark">
+                        {{ restaurant.name }}
+                    </h1>
+
+                    <p class="text-muted fs-5">
+                        Welcome to our restaurant
+                    </p>
+
+                </div>
+
+                <div class="row text-center mb-5">
+
+                    <div class="col-md-4 mb-3">
+
+                        <div class="border rounded-4 p-3 h-100">
+
+                            <h6 class="text-secondary mb-2">
+                                TABLE
+                            </h6>
+
+                            <h3 class="text-primary fw-bold">
+                                {{ table.table_number }}
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <div class="border rounded-4 p-3 h-100">
+
+                            <h6 class="text-secondary mb-2">
+                                CONTACT
+                            </h6>
+
+                            <h6 class="mb-0">
+                                {{ restaurant.phone }}
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <div class="border rounded-4 p-3 h-100">
+
+                            <h6 class="text-secondary mb-2">
+                                HOURS
+                            </h6>
+
+                            <h6 class="mb-0">
+                                {{ restaurant.opening_time }}
+                                -
+                                {{ restaurant.closing_time }}
+                            </h6>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="mb-4 text-center">
+
+                    <h4 class="fw-bold">
+                        Start Your Dining Session
+                    </h4>
+
+                    <p class="text-muted">
+                        Enter your details to begin ordering.
+                    </p>
+
+                </div>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-semibold">
+                            Customer Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="customer_name"
+                            class="form-control form-control-lg"
+                            placeholder="Enter your name"
+                            required>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-semibold">
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            name="mobile_number"
+                            class="form-control form-control-lg"
+                            placeholder="Enter 10-digit mobile number"
+                            pattern="[0-9]{10}"
+                            minlength="10"
+                            maxlength="10"
+                            required>
+
+                    </div>
+
+                    {% if error %}
+
+                    <div class="alert alert-danger">
+
+                        {{ error }}
+
+                    </div>
+
+                    {% endif %}
+
+                    <div class="d-grid">
+
+                        <button
+                            type="submit"
+                            class="btn btn-success btn-lg">
+
+                            Start Ordering
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <hr class="my-5">
+
+                <div class="text-center text-muted">
+
+                    <small>
+
+                        {{ restaurant.address }}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

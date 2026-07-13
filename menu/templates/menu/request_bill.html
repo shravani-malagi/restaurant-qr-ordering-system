@@ -1,0 +1,215 @@
+{% extends "menu/base.html" %}
+
+{% block title %}
+Final Bill
+{% endblock %}
+
+{% block content %}
+
+{% if error %}
+
+<div class="alert alert-warning text-center">
+
+    {{ error }}
+
+</div>
+
+{% endif %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-9">
+
+        <div class="card">
+
+            <div class="card-header bg-dark text-white text-center py-4">
+
+                <h2 class="mb-0">
+
+                    Final Bill
+
+                </h2>
+
+            </div>
+
+            <div class="card-body p-5">
+
+                <div class="text-center mb-4">
+
+                    <h2 class="fw-bold">
+
+                        Restaurant QR
+
+                    </h2>
+
+                    <p class="text-muted mb-0">
+
+                        Thank you for dining with us
+
+                    </p>
+
+                </div>
+
+                <div class="row mb-4">
+
+                    <div class="col-md-6">
+
+                        <p>
+
+                            <strong>Customer :</strong>
+
+                            {{ session.customer_name }}
+
+                        </p>
+
+                        <p>
+
+                            <strong>Table :</strong>
+
+                            {{ session.table.table_number }}
+
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-6 text-md-end">
+
+                        <p>
+
+                            <strong>Date :</strong>
+
+                            {% now "d M Y" %}
+
+                        </p>
+
+                        <p>
+
+                            <strong>Time :</strong>
+
+                            {% now "h:i A" %}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <table class="table table-bordered align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>Item</th>
+
+                            <th class="text-center">Qty</th>
+
+                            <th class="text-end">Price</th>
+
+                            <th class="text-end">Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for order in orders %}
+
+                            {% for item in order.items.all %}
+
+                            <tr>
+
+                                <td>
+
+                                    {{ item.menu_item.name }}
+
+                                </td>
+
+                                <td class="text-center">
+
+                                    {{ item.quantity }}
+
+                                </td>
+
+                                <td class="text-end">
+
+                                    ₹{{ item.menu_item.price }}
+
+                                </td>
+
+                                <td class="text-end">
+
+                                    ₹{{ item.subtotal|default:item.menu_item.price }}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+                <div class="row mt-4">
+
+                    <div class="col-md-6">
+
+                        <h5>
+
+                            Total Orders :
+
+                            {{ orders|length }}
+
+                        </h5>
+
+                    </div>
+
+                    <div class="col-md-6 text-end">
+
+                        <h2 class="fw-bold text-success">
+
+                            Grand Total : ₹{{ grand_total }}
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="text-center mb-4">
+
+                    <p class="text-muted">
+
+                        Please verify your bill before proceeding to payment.
+
+                    </p>
+
+                </div>
+
+                <div class="d-grid">
+
+                    <a href="{% url 'payment' %}"
+
+                       class="btn btn-success btn-lg">
+
+                        Proceed to Payment
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

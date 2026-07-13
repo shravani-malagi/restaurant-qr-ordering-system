@@ -1,0 +1,257 @@
+{% extends "menu/base.html" %}
+
+{% block title %}
+Current Order
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-10">
+
+        <div class="card mb-4">
+
+            <div class="card-body text-center">
+
+                <h2 class="fw-bold mb-2">
+                    Current Order
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Review your order before confirming it.
+                </p>
+
+            </div>
+
+        </div>
+
+        {% if cart_items %}
+
+            {% for cart in cart_items %}
+
+            <div class="card mb-4">
+
+                <div class="card-body">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-md-7">
+
+                            <h4 class="fw-bold mb-2">
+                                {{ cart.item.name }}
+                            </h4>
+
+                            <p class="text-muted mb-3">
+                                {{ cart.item.description }}
+                            </p>
+
+                            <h5 class="text-success fw-bold">
+                                ₹{{ cart.item.price }}
+                            </h5>
+
+                        </div>
+
+                        <div class="col-md-5 text-md-end mt-3 mt-md-0">
+
+                            <div class="mb-3">
+
+                                <strong>Quantity</strong>
+
+                                <div class="mt-2">
+
+                                    <a href="{% url 'decrease_quantity' cart.item.id %}"
+                                       class="btn btn-outline-danger">
+
+                                        −
+
+                                    </a>
+
+                                    <span class="mx-3 fs-4 fw-bold">
+
+                                        {{ cart.quantity }}
+
+                                    </span>
+
+                                    <a href="{% url 'increase_quantity' cart.item.id %}"
+                                       class="btn btn-outline-success">
+
+                                        +
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                            <h5 class="mb-3">
+
+                                Subtotal
+
+                                <span class="text-success">
+
+                                    ₹{{ cart.subtotal }}
+
+                                </span>
+
+                            </h5>
+
+                            <a href="{% url 'remove_from_cart' cart.item.id %}"
+                               class="btn btn-outline-danger">
+
+                                Remove Item
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+            <div class="card mb-4">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <h3 class="mb-0">
+
+                            Current Order Total
+
+                        </h3>
+
+                        <h2 class="text-success fw-bold mb-0">
+
+                            ₹{{ total }}
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+
+                    <div class="d-grid">
+
+                        <a href="{% url 'home' %}"
+                           class="btn btn-secondary btn-lg">
+
+                            Continue Ordering
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="d-grid">
+
+                        <a href="{% url 'checkout' %}"
+                           class="btn btn-primary btn-lg">
+
+                            Confirm Order
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="d-grid">
+
+                        <a href="{% url 'request_bill' %}"
+                           class="btn btn-success btn-lg">
+
+                            Request Bill
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% else %}
+
+            <div class="card">
+
+                <div class="card-body text-center py-5">
+
+                    <h2 class="mb-3">
+
+                        🛒
+
+                    </h2>
+
+                    <h3>
+
+                        Your cart is empty
+
+                    </h3>
+
+                    <p class="text-muted">
+
+                        You can continue ordering or request the final bill if you've already placed your orders.
+
+                    </p>
+
+                    <div class="row justify-content-center mt-4">
+
+                        <div class="col-md-4 mb-2">
+
+                            <div class="d-grid">
+
+                                <a href="{% url 'home' %}"
+                                   class="btn btn-secondary btn-lg">
+
+                                    Continue Ordering
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="d-grid">
+
+                                <a href="{% url 'request_bill' %}"
+                                   class="btn btn-success btn-lg">
+
+                                    Request Bill
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

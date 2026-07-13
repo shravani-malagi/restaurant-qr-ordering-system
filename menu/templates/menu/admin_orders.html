@@ -1,0 +1,265 @@
+{% extends "menu/base.html" %}
+
+{% block title %}
+Restaurant Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+
+    <div>
+        <h2 class="fw-bold">🍽 Restaurant Dashboard</h2>
+        <p class="text-muted mb-0">Kitchen Live Orders</p>
+    </div>
+
+    <div class="text-end">
+
+    <h4 class="mb-0">{{ total_orders }}</h4>
+    <small class="text-muted d-block mb-2">
+        Total Orders
+    </small>
+
+    <a href="{% url 'served_orders_history' %}"
+       class="btn btn-success btn-sm">
+        ✅ Served History
+    </a>
+
+</div>
+
+</div>
+
+<div class="row mb-4">
+
+    <div class="col-lg-3 col-6 mb-3">
+        <div class="card bg-dark text-white">
+            <div class="card-body text-center">
+                <h6>Total</h6>
+                <h2>{{ total_orders }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6 mb-3">
+        <div class="card bg-warning">
+            <div class="card-body text-center">
+                <h6>Pending</h6>
+                <h2>{{ pending_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6 mb-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <h6>Preparing</h6>
+                <h2>{{ preparing_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6 mb-3">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <h6>Served</h6>
+                <h2>{{ served_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<form method="GET" class="card shadow-sm p-3 mb-4">
+
+    <div class="row">
+
+        <div class="col-md-8 mb-2">
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Search Customer, Mobile or Table..."
+                value="{{ search }}">
+        </div>
+
+        <div class="col-md-4">
+            <button class="btn btn-dark w-100">
+                Search
+            </button>
+        </div>
+
+    </div>
+
+</form>
+
+{% for order in orders %}
+
+<div class="card shadow mb-4 border-0">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <span class="badge bg-dark fs-6">
+                Table {{ order.session.table.table_number }}
+            </span>
+
+            <h4 class="text-success mb-0">
+                ₹{{ order.total_amount }}
+            </h4>
+
+        </div>
+
+        <h5 class="fw-bold">
+            {{ order.session.customer_name }}
+        </h5>
+
+        <p class="text-muted mb-1">
+            📞 {{ order.session.mobile_number }}
+        </p>
+
+        <small class="text-secondary">
+            {{ order.created_at|date:"d M Y h:i A" }}
+        </small>
+
+        <hr>
+
+        {% for item in order.items.all %}
+
+        <div class="border rounded p-3 mb-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h6 class="mb-1">
+                        {{ item.menu_item.name }}
+                    </h6>
+
+                    <small class="text-muted">
+                        Qty : {{ item.quantity }}
+                    </small>
+                </div>
+
+                <div>
+
+                    {% if item.status == "Pending" %}
+                        <span class="badge bg-warning text-dark">
+                            🟡 Pending
+                        </span>
+
+                    {% elif item.status == "Preparing" %}
+                        <span class="badge bg-primary">
+                            🔵 Preparing
+                        </span>
+
+                    {% else %}
+                        <span class="badge bg-success">
+                            🟢 Served
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col-md-4 mb-2">
+
+                    <a href="{% url 'update_order_item_status' item.id 'Pending' %}"
+                       class="btn btn-warning btn-sm w-100">
+
+                        Pending
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-4 mb-2">
+
+                    <a href="{% url 'update_order_item_status' item.id 'Preparing' %}"
+                       class="btn btn-primary btn-sm w-100">
+
+                        Preparing
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-4 mb-2">
+
+                    <a href="{% url 'update_order_item_status' item.id 'Served' %}"
+                       class="btn btn-success btn-sm w-100">
+
+                        Served
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        <div class="mt-3">
+
+            <strong>Overall Order Status :</strong>
+
+            {% if order.status == "Pending" %}
+
+                <span class="badge bg-warning text-dark">
+                    🟡 Pending
+                </span>
+
+            {% elif order.status == "Preparing" %}
+
+                <span class="badge bg-primary">
+                    🔵 Preparing
+                </span>
+
+            {% else %}
+
+                <span class="badge bg-success">
+                    🟢 Served
+                </span>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="card">
+
+    <div class="card-body text-center py-5">
+
+        <h3>No Active Orders</h3>
+
+        <p class="text-muted">
+
+            New orders will appear here.
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+<script>
+
+setTimeout(function () {
+    location.reload();
+}, 15000);
+
+</script>
+
+{% endblock %}

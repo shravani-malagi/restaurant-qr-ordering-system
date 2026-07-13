@@ -1,0 +1,55 @@
+{% extends "menu/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Table Occupied
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+
+        <div class="card shadow text-center border-warning">
+
+            <div class="card-header bg-warning text-dark">
+                <h2 class="mb-0">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    Table Occupied
+                </h2>
+            </div>
+
+            <div class="card-body">
+
+                <div class="display-1 text-warning mb-3">
+                    <i class="bi bi-table"></i>
+                </div>
+
+                <h3 class="mb-3">
+                    Table {{ table.table_number }}
+                </h3>
+
+                <p class="lead">
+                    This table already has an active dining session.
+                </p>
+
+                <p class="text-muted">
+                    Please contact the restaurant staff if you need assistance or if you believe this is a mistake.
+                </p>
+
+                <div class="mt-4">
+                    <a href="/" class="btn btn-secondary btn-lg">
+                        <i class="bi bi-house-door-fill"></i>
+                        Go to Home
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

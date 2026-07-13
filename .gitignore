@@ -1,0 +1,19 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+venv/
+env/
+
+# SQLite Database
+db.sqlite3
+
+# VS Code
+.vscode/
+
+# Python cache
+*.log
+
+# Environment Variables
+.env
