@@ -127,7 +127,7 @@ http://127.0.0.1:8000/
 ![Final Bill](screenshots/final-bill.png)
 
 ### 💳 Payment
-![Payment](screenshots/payment.png)
+![Payment](screenshots/Payment.png)
 
 ### 🍳 Restaurant Dashboard
 ![Restaurant Dashboard](screenshots/restaurant-dashboard.png)
@@ -136,7 +136,7 @@ http://127.0.0.1:8000/
 ![Served Orders History](screenshots/served-orders-history.png)
 
 ### ⚙️ Django Admin
-![Django Admin](screenshots/django-admin.png)
+![Django Admin](screenshots/django -admin.png)
 ---
 
 ## 🔮 Future Improvements
