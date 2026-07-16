@@ -136,7 +136,8 @@ http://127.0.0.1:8000/
 ![Served Orders History](screenshots/served-orders-history.png)
 
 ### ⚙️ Django Admin
-![Django Admin](screenshots/django -admin.png)
+![Django Admin](screenshots/django-admin.png)
+
 ---
 
 ## 🔮 Future Improvements
