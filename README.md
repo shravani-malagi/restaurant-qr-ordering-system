@@ -1,6 +1,6 @@
 # 🍽️ Restaurant QR Ordering System
 
-A QR-based Restaurant Ordering System built using Django that allows customers to scan a QR code placed on a restaurant table, browse the menu, place orders, track order status, and view their bill in real-time. Restaurant staff can manage incoming orders through a dedicated dashboard.
+A modern QR-based digital restaurant ordering platform built with Django that enables customers to scan table QR codes, browse menus, place orders, track order status, and request bills in real time.
 
 ---
 
