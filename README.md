@@ -109,8 +109,34 @@ http://127.0.0.1:8000/
 
 ## 📸 Screenshots
 
-Screenshots will be added soon.
+## 📸 Screenshots
 
+### 🏠 Welcome Page
+![Welcome](screenshots/welcome-page.png)
+
+### 🍽️ Menu Page
+![Menu](screenshots/menu-page.png)
+
+### 🛒 Current Order
+![Current Order](screenshots/current-order.png)
+
+### ✅ Order Confirmation
+![Order Confirmation](screenshots/order-confirmation.png)
+
+### 📄 Final Bill
+![Final Bill](screenshots/final-bill.png)
+
+### 💳 Payment
+![Payment](screenshots/payment.png)
+
+### 🍳 Restaurant Dashboard
+![Restaurant Dashboard](screenshots/restaurant-dashboard.png)
+
+### 📜 Served Orders History
+![Served Orders History](screenshots/served-orders-history.png)
+
+### ⚙️ Django Admin
+![Django Admin](screenshots/django-admin.png)
 ---
 
 ## 🔮 Future Improvements
