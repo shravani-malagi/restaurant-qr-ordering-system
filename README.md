@@ -109,8 +109,6 @@ http://127.0.0.1:8000/
 
 ## 📸 Screenshots
 
-## 📸 Screenshots
-
 ### 🏠 Welcome Page
 ![Welcome](screenshots/welcome-page.png)
 
